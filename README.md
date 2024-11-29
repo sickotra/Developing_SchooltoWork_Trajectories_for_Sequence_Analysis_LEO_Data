@@ -44,5 +44,7 @@ Department for Education; HM Revenue and Customs; Department for Work and Pensio
 2) **LEO Sequence Analysis Data Development** - This includes the R code used to create the bespoke sequence analysis dataset
 3) **Lookups and Other Data** - This includes the publically available geographic lookups and additional data used in the R code 
 
+-------------------------------------------------------------------------
 
-
+MIT License
+Copyright (c) 2024 Shivani Sickotra
