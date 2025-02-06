@@ -371,7 +371,7 @@ Data</h1>
 Charactersitics</a></li>
 <li><a href="#nccis" id="toc-nccis"><span class="toc-section-number">1.2</span> NCCIS</a></li>
 <li><a href="#hesa" id="toc-hesa"><span class="toc-section-number">1.3</span> HESA</a></li>
-<li><a href="#dwp-out-of-work-benefits-employment-and-self-employment" id="toc-dwp-out-of-work-benefits-employment-and-self-employment"><span class="toc-section-number">1.4</span> DWP Out of Work Benefits,
+<li><a href="#dwp-out-of-work-benefits-hmrc-employment-and-self-employment" id="toc-dwp-out-of-work-benefits-hmrc-employment-and-self-employment"><span class="toc-section-number">1.4</span> DWP Out of Work Benefits, HMRC
 Employment and Self-employment</a></li>
 </ul></li>
 <li><a href="#preprocessing" id="toc-preprocessing"><span class="toc-section-number">2</span> Preprocessing</a>
@@ -386,8 +386,8 @@ Sequence Analysis Alphabet</a></li>
 </ul></li>
 <li><a href="#preprocess-hesa-activity-states-201314---201819-hesa-reporting-academic-year" id="toc-preprocess-hesa-activity-states-201314---201819-hesa-reporting-academic-year"><span class="toc-section-number">2.3</span> Preprocess HESA Activity States
 (2013/14 - 2018/19 [HESA reporting] academic year)</a></li>
-<li><a href="#preprocess-dwp-out-of-work-benefits-employment-and-self-employment-activities" id="toc-preprocess-dwp-out-of-work-benefits-employment-and-self-employment-activities"><span class="toc-section-number">2.4</span> Preprocess DWP Out of Work
-Benefits, Employment and Self-employment Activities</a>
+<li><a href="#preprocess-dwp-out-of-work-benefits-hmrc-employment-and-self-employment-activities" id="toc-preprocess-dwp-out-of-work-benefits-hmrc-employment-and-self-employment-activities"><span class="toc-section-number">2.4</span> Preprocess DWP Out of Work
+Benefits, HMRC Employment and Self-employment Activities</a>
 <ul>
 <li><a href="#out-of-work-benefits-data-201112---201819-tax-year" id="toc-out-of-work-benefits-data-201112---201819-tax-year"><span class="toc-section-number">2.4.1</span> Out of Work Benefits Data
 (2011/12 - 2018/19 tax year)</a></li>
@@ -399,8 +399,8 @@ Spells</a></li>
 2018/19 tax year)</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#integrate-nccis-hesa-and-dwp-benefits-employment-and-self-employment-activities" id="toc-integrate-nccis-hesa-and-dwp-benefits-employment-and-self-employment-activities"><span class="toc-section-number">3</span> Integrate NCCIS, HESA and DWP
-Benefits, Employment and Self-employment Activities</a></li>
+<li><a href="#integrate-nccis-hesa-and-dwp-benefits-hmrc-employment-and-self-employment-activities" id="toc-integrate-nccis-hesa-and-dwp-benefits-hmrc-employment-and-self-employment-activities"><span class="toc-section-number">3</span> Integrate NCCIS, HESA and DWP
+Benefits, HMRC Employment and Self-employment Activities</a></li>
 <li><a href="#geographic-states-201112---201819-tax-year" id="toc-geographic-states-201112---201819-tax-year"><span class="toc-section-number">4</span> Geographic States (2011/12 - 2018/19
 tax year)</a></li>
 <li><a href="#employment-earnings-201112---201819-tax-year" id="toc-employment-earnings-201112---201819-tax-year"><span class="toc-section-number">5</span> Employment Earnings (2011/12 -
@@ -421,21 +421,22 @@ input into <strong>Sequence Analysis</strong> alogrothims.
 <ul>
 <li><p><strong>UK Department for Education</strong> - National Pupil
 Database (NPD), Higher Education Statistics Agency (HESA)</p></li>
-<li><p><strong>UK Department for Work and Pensions</strong> -
-Employment, Self-Employment, Benefits and Geography data</p>
+<li><p><strong>UK Department for Work and Pensions</strong> - Benefits
+and Geography data</p>
 </p></li>
+<li><p><strong>HM Revenue and Customs</strong> - Employment and
+Self-Employment data</p></li>
 </ul>
 </p>
 This code used the Spring School Census from the NPD, the National
-Client Caseload Information System from the NPD, HESA, DWP Employment,
-Self-employment and Benefits data to create a longitudinal record of the
-yearly activity histories for <strong>556,182 individuals from the
+Client Caseload Information System from the NPD, HESA, HMRC Employment,
+Self-employment and DWP Benefits data to create a longitudinal record of
+the yearly activity histories for <strong>556,182 individuals from the
 2010/11 school-leaver cohort in England</strong>. The activity histories
 begin from the first non-compulsory observed state in 2011/12 until the
 2018/19 academic year, corresponding to ages 16/17 to ages 23/24.
 Individual-level socio-demographic charactersitics are also prepared, as
-well as exploratory longitudinal geographic and longitudinal earnings
-data.
+well as longitudinal geographic and longitudinal earnings data.
 </p>
 </p>
 The code first imports data extracted from the LEO database using SQL in
@@ -541,9 +542,9 @@ HESA_2016_17 &lt;- read_csv(&quot;../SQL/Activity_States/HESA/2016_17_HESA.csv&q
 HESA_2017_18 &lt;- read_csv(&quot;../SQL/Activity_States/HESA/2017_18_HESA.csv&quot;) 
 HESA_2018_19 &lt;- read_csv(&quot;../SQL/Activity_States/HESA/2018_19_HESA.csv&quot;) </code></pre>
 </div>
-<div id="dwp-out-of-work-benefits-employment-and-self-employment" class="section level2" number="1.4">
+<div id="dwp-out-of-work-benefits-hmrc-employment-and-self-employment" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> DWP Out of Work
-Benefits, Employment and Self-employment</h2>
+Benefits, HMRC Employment and Self-employment</h2>
 <pre class="r"><code># Read in the Out of Work Benefits, Employment and Self Employment data
 benefits &lt;- read_csv(&quot;../SQL/Activity_States/Benefits/2010_11_Cohort_OfW_Benefits_Spells.csv&quot;) 
 emp &lt;- read_csv(&quot;../SQL/Activity_States/Employment/2010_11_Cohort_Emp_Spells.csv&quot;) 
@@ -1006,9 +1007,9 @@ HESA_activites &lt;- merge(x=cohort_ID, y=HESA_activites, by = &quot;ID_PMR&quot
 #write.csv(HESA_activites,&quot;Code Outputs/Compartmentalised/HESA_merged_activities.csv&quot;,
  #         row.names=FALSE)</code></pre>
 </div>
-<div id="preprocess-dwp-out-of-work-benefits-employment-and-self-employment-activities" class="section level2" number="2.4">
+<div id="preprocess-dwp-out-of-work-benefits-hmrc-employment-and-self-employment-activities" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Preprocess DWP Out of
-Work Benefits, Employment and Self-employment Activities</h2>
+Work Benefits, HMRC Employment and Self-employment Activities</h2>
 <div id="out-of-work-benefits-data-201112---201819-tax-year" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Out of Work
 Benefits Data (2011/12 - 2018/19 tax year)</h3>
@@ -1246,9 +1247,9 @@ SEmp_wide &lt;- merge(x=cohort_ID, y=SEmp_wide, by = &quot;ID_PMR&quot;, all.x =
 </div>
 </div>
 </div>
-<div id="integrate-nccis-hesa-and-dwp-benefits-employment-and-self-employment-activities" class="section level1" number="3">
+<div id="integrate-nccis-hesa-and-dwp-benefits-hmrc-employment-and-self-employment-activities" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Integrate NCCIS, HESA
-and DWP Benefits, Employment and Self-employment Activities</h1>
+and DWP Benefits, HMRC Employment and Self-employment Activities</h1>
 <pre class="r"><code># Read in all preprocessed data
 ind_char &lt;- read_csv(&quot;Code Outputs/Compartmentalised/ind_char.csv&quot;)
 
@@ -1348,7 +1349,7 @@ Emp_miss &lt;- Employment_merged_activities %&gt;%
         axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.title.y = element_text(size=6),
         legend.position = &quot;none&quot;) +
-  ylab(&quot;DWP Employment&quot;)
+  ylab(&quot;HMRC Employment&quot;)
 
 # Self Employment
 SEmp_miss &lt;- Self_Emp_merged_activities %&gt;%
@@ -1362,7 +1363,7 @@ SEmp_miss &lt;- Self_Emp_merged_activities %&gt;%
   scale_x_discrete(position = &quot;bottom&quot;, 
                    labels = c(&quot;2011/12&quot;, &quot;2012/13&quot;, &quot;2012/14&quot;, &quot;2014/15&quot;, &quot;2015/16&quot;,
                               &quot;2016/17&quot;,&quot;2017/18&quot;, &quot;2018/19&quot;)) + 
-  ylab(&quot;DWP Self Employment&quot;) + 
+  ylab(&quot;HMRC Self Employment&quot;) + 
   xlab(&quot;Academic/Tax Year&quot;)</code></pre>
 <pre class="r"><code># Impose hierarchy of NCCIS &lt;- HESA &lt;- Benefits &lt;- Emp &lt;- SEmp
 # Effectively overlaying dataframes to create an integrated version of activities

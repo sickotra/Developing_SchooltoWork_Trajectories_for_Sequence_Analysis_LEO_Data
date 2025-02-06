@@ -29,9 +29,11 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE, warning = FALSE)
 
 * **UK Department for Education** - National Pupil Database (NPD), Higher Education Statistics Agency (HESA)
 
-* **UK Department for Work and Pensions** - Employment, Self-Employment, Benefits and Geography data </p>
+* **UK Department for Work and Pensions** - Benefits and Geography data </p>
 
-</p> This code used the Spring School Census from the NPD, the National Client Caseload Information System from the NPD, HESA, DWP Employment, Self-employment and Benefits data to create a longitudinal record of the yearly activity histories for **556,182 individuals from the 2010/11 school-leaver cohort in England**. The activity histories begin from the first non-compulsory observed state in 2011/12 until the 2018/19 academic year, corresponding to ages 16/17 to ages 23/24. Individual-level socio-demographic charactersitics are also prepared, as well as exploratory longitudinal geographic and longitudinal earnings data. </p>
+* **HM Revenue and Customs** - Employment and Self-Employment data
+
+</p> This code used the Spring School Census from the NPD, the National Client Caseload Information System from the NPD, HESA, HMRC Employment, Self-employment and DWP Benefits data to create a longitudinal record of the yearly activity histories for **556,182 individuals from the 2010/11 school-leaver cohort in England**. The activity histories begin from the first non-compulsory observed state in 2011/12 until the 2018/19 academic year, corresponding to ages 16/17 to ages 23/24. Individual-level socio-demographic charactersitics are also prepared, as well as longitudinal geographic and longitudinal earnings data. </p>
 
 </p> The code first imports data extracted from the LEO database using SQL in Section 1. Then these are preprocessed separately into the required format for sequence analysis in Section 2. Once all activities have been prepared, they are integrated into one dataset containing all activity histories in Section 3. The Combined Authority that an individual was residing in at school-leaving age is linked to their corresponding activity history. This can be used to subset individuals by Combined Authorities for sequence analysis. </p>
 
@@ -128,7 +130,7 @@ HESA_2018_19 <- read_csv("../SQL/Activity_States/HESA/2018_19_HESA.csv")
 ```
 
 
-## DWP Out of Work Benefits, Employment and Self-employment
+## DWP Out of Work Benefits, HMRC Employment and Self-employment
 
 ```{r, error=FALSE, message=FALSE, warning=FALSE, results='hide'}
 # Read in the Out of Work Benefits, Employment and Self Employment data
@@ -644,7 +646,7 @@ HESA_activites <- merge(x=cohort_ID, y=HESA_activites, by = "ID_PMR", all.x = TR
 ```
 
 
-## Preprocess DWP Out of Work Benefits, Employment and Self-employment Activities
+## Preprocess DWP Out of Work Benefits, HMRC Employment and Self-employment Activities
 
 
 ### Out of Work Benefits Data (2011/12 - 2018/19 tax year)
@@ -882,7 +884,7 @@ SEmp_wide <- merge(x=cohort_ID, y=SEmp_wide, by = "ID_PMR", all.x = TRUE)
 
 ```
 
-# Integrate NCCIS, HESA and DWP Benefits, Employment and Self-employment Activities
+# Integrate NCCIS, HESA and DWP Benefits, HMRC Employment and Self-employment Activities
 
 ```{r, message=FALSE, warning=FALSE}
 # Read in all preprocessed data
@@ -994,7 +996,7 @@ Emp_miss <- Employment_merged_activities %>%
         axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.title.y = element_text(size=6),
         legend.position = "none") +
-  ylab("DWP Employment")
+  ylab("HMRC Employment")
 
 # Self Employment
 SEmp_miss <- Self_Emp_merged_activities %>%
@@ -1008,7 +1010,7 @@ SEmp_miss <- Self_Emp_merged_activities %>%
   scale_x_discrete(position = "bottom", 
                    labels = c("2011/12", "2012/13", "2012/14", "2014/15", "2015/16",
                               "2016/17","2017/18", "2018/19")) + 
-  ylab("DWP Self Employment") + 
+  ylab("HMRC Self Employment") + 
   xlab("Academic/Tax Year")
 ```
 
